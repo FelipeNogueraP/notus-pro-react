@@ -1,15 +1,15 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from "react";
+import { Link } from "react-router-dom";
 
-import { Helmet } from 'react-helmet'
+import { Helmet } from "react-helmet";
 
-import Header from '../components/header'
-import Label from '../components/label'
-import MemberDetails from '../components/member-details'
-import ServiceCard from '../components/service-card'
-import SecondaryButton from '../components/secondary-button'
-import Footer from '../components/footer'
-import './home.css'
+import Header from "../components/header";
+import Label from "../components/label";
+import MemberDetails from "../components/member-details";
+import ServiceCard from "../components/service-card";
+import SecondaryButton from "../components/secondary-button";
+import Footer from "../components/footer";
+import "./home.css";
 
 const Home = (props) => {
   return (
@@ -23,12 +23,15 @@ const Home = (props) => {
         <Header></Header>
         <div className="home-container01">
           <div className="home-container02">
-            <h1 className="home-text">Abogada.</h1>
+            <h1 className="home-text">
+              ¿Es usted un Colombiano residente en el Exterior?
+            </h1>
             <span className="home-text01">
               <span></span>
               <span>
-              Abogada especialista en Derecho Urbano, que le ayudará a realizar sus tramites en 
-              colombia, sin importar en que país usted se encuentre.
+                Abogada especialista en Derecho Urbano, que le ayudará a
+                realizar sus tramites en Colombia, sin importar en que país
+                usted se encuentre.
               </span>
             </span>
           </div>
@@ -434,7 +437,7 @@ const Home = (props) => {
       </div>
       <Footer></Footer>
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
