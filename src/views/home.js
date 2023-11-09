@@ -399,43 +399,63 @@ const Home = (props) => {
               for them, leave them to fall. But it isn&apos;t always how you
               would like it to be, especially when you do nothing for yourself.
             </span>
-            <div className="home-form">
-              <h1 className="home-text51">Want to work with us?</h1>
-              <span className="home-text52 TextXL">
-                Complete this form and we will get back to you in 24 hours.
+
+            <div className="home-contact">
+              <Label text="MESSAGE US"></Label>
+              <h2 className="home-text49">Type in the bellow form</h2>
+              <span className="home-text50 TextXL">
+                They say there&apos;s no future for the street rascals nothing
+                for them leave them to fall. But it isn&apos;t always how you
+                would like it to be especially when you do nothing for yourself.
               </span>
-              <span className="home-text53 TextXS">FULL NAME</span>
-              <input
-                type="text"
-                placeholder="Full Name"
-                className="home-textinput TextSM input"
-              />
-              <span className="home-text54 TextXS">EMAIL</span>
-              <input
-                type="text"
-                placeholder="Email"
-                className="home-textinput1 TextSM input"
-              />
-              <span className="home-text55 TextXS">MESSAGE</span>
-              <textarea
-                cols="80"
-                rows="4"
-                disabled="true"
-                placeholder="Type a message"
-                className="home-textarea TextSM textarea"
-              ></textarea>
-              <div className="home-container49">
-                <SecondaryButton
-                  button="Send message"
-                  rootClassName="secondary-button-root-class-name"
-                ></SecondaryButton>
-              </div>
+              <form
+                className="home-form"
+                action="https://s3ie0p2dw3.execute-api.us-west-2.amazonaws.com/testingApi/messages"
+                method="POST"
+              >
+                <h1 className="home-text51">Want to reach us?</h1>
+                <span className="home-text52 TextXL">
+                  Complete this form and we will get back to you ASAP.
+                </span>
+                <span className="home-text53 TextXS">FULL NAME</span>
+                <input
+                  type="text"
+                  name="fullName"
+                  placeholder="Full Name"
+                  className="home-textinput TextSM input"
+                  required
+                />
+                <span className="home-text54 TextXS">EMAIL</span>
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Email"
+                  className="home-textinput1 TextSM input"
+                  required
+                />
+                <span className="home-text55 TextXS">MESSAGE</span>
+                <textarea
+                  name="message"
+                  cols="80"
+                  rows="4"
+                  placeholder="Type a message"
+                  className="home-textarea TextSM textarea"
+                  required
+                ></textarea>
+                <div className="home-container49">
+                  <input
+                    type="submit"
+                    value="Send message"
+                    className="secondary-button-button TextXS button"
+                  />
+                </div>
+              </form>
             </div>
           </div>
+          <img alt="image" src="/gray-vector.svg" className="home-image5" />
         </div>
-        <img alt="image" src="/gray-vector.svg" className="home-image5" />
+        <Footer></Footer>
       </div>
-      <Footer></Footer>
     </div>
   );
 };
