@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 import { Helmet } from "react-helmet";
@@ -12,6 +12,47 @@ import Footer from "../components/footer";
 import "./home.css";
 
 const Home = (props) => {
+  const [showPopup, setShowPopup] = useState(false);
+  const [popupMessage, setPopupMessage] = useState("");
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const data = {
+      fullName: formData.get("fullName"),
+      email: formData.get("email"),
+      message: formData.get("message"),
+    };
+
+    try {
+      const response = await fetch(
+        "https://s3ie0p2dw3.execute-api.us-west-2.amazonaws.com/testingApi/messages",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
+
+      // Ensure that the 'result' variable is declared and used within this block
+      const result = await response.json(); // Parse the JSON from the response
+
+      if (response.ok) {
+        setPopupMessage(result.message || "Email sent successfully!");
+        setShowPopup(true); // Make the popup visible
+      } else {
+        // Use the result variable within the scope of the try block
+        throw new Error(result.message || "Error sending the message");
+      }
+    } catch (error) {
+      console.error("Fetch error:", error);
+      setPopupMessage(error.message || "Error sending the message");
+      setShowPopup(true); // Also make the popup visible in case of error
+    }
+  };
+
   return (
     <div className="home-container">
       <Helmet>
@@ -408,11 +449,7 @@ const Home = (props) => {
                 for them leave them to fall. But it isn&apos;t always how you
                 would like it to be especially when you do nothing for yourself.
               </span>
-              <form
-                className="home-form"
-                action="https://s3ie0p2dw3.execute-api.us-west-2.amazonaws.com/testingApi/messages"
-                method="POST"
-              >
+              <form className="home-form" onSubmit={handleSubmit}>
                 <h1 className="home-text51">Want to reach us?</h1>
                 <span className="home-text52 TextXL">
                   Complete this form and we will get back to you ASAP.
@@ -451,6 +488,20 @@ const Home = (props) => {
                 </div>
               </form>
             </div>
+            {/* Popup Modal */}
+            {showPopup && (
+              <div className="popup">
+                <div className="popup-content">
+                  <span
+                    className="close-button"
+                    onClick={() => setShowPopup(false)}
+                  >
+                    &times;
+                  </span>
+                  <p>{popupMessage}</p>
+                </div>
+              </div>
+            )}
           </div>
           <img alt="image" src="/gray-vector.svg" className="home-image5" />
         </div>
