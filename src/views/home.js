@@ -17,6 +17,7 @@ const Home = (props) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
     const formData = new FormData(event.target);
     const data = {
       fullName: formData.get("fullName"),
@@ -36,20 +37,18 @@ const Home = (props) => {
         }
       );
 
-      // Ensure that the 'result' variable is declared and used within this block
-      const result = await response.json(); // Parse the JSON from the response
-
-      if (response.ok) {
-        setPopupMessage(result.message || "Email sent successfully!");
-        setShowPopup(true); // Make the popup visible
-      } else {
-        // Use the result variable within the scope of the try block
-        throw new Error(result.message || "Error sending the message");
+      if (!response.ok) {
+        // If response is not ok, throw an error with the status
+        throw new Error(`HTTP error! Status: ${response.status}`);
       }
+
+      const result = await response.json(); // Parse the JSON from the response
+      setPopupMessage(result.message || "Email sent successfully!");
+      setShowPopup(true); // Make the popup visible
     } catch (error) {
       console.error("Fetch error:", error);
       setPopupMessage(error.message || "Error sending the message");
-      setShowPopup(true); // Also make the popup visible in case of error
+      setShowPopup(true); // Make the popup visible in case of error
     }
   };
 
